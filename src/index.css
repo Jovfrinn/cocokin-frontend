@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-serif: "Cormorant Garamond", serif;
+  --font-sans: "Outfit", sans-serif;
+  
+  --color-romantic-bg: #FCF6F5;
+  --color-romantic-text: #2C2627;
+  --color-romantic-muted: #6E6264;
+  --color-romantic-rose: #D68C96;
+  --color-romantic-rose-hover: #C57B85;
+  --color-romantic-clay: #CDA291;
+  --color-romantic-clay-hover: #BD917E;
+  --color-romantic-border: #EADBD7;
+
+  --color-romantic-dark-bg: #151213;
+  --color-romantic-dark-card: #1C1819;
+  --color-romantic-dark-text: #F6EDED;
+  --color-romantic-dark-muted: #A5989A;
+  --color-romantic-dark-rose: #EAA4AE;
+  --color-romantic-dark-rose-hover: #DB8F9A;
+  --color-romantic-dark-clay: #DCB0A0;
+  --color-romantic-dark-border: #2E2527;
+}
+
+@layer base {
+  body {
+    /* Gabungkan style light & dark langsung menggunakan utility class Tailwind */
+    @apply bg-romantic-bg text-romantic-text dark:bg-romantic-dark-bg dark:text-romantic-dark-text font-sans antialiased transition-colors duration-300;
+  }
+}
