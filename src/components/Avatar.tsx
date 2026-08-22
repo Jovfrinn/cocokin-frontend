@@ -21,7 +21,7 @@ export default function Avatar({ name, size = "md", className = "" }: AvatarProp
 
   return (
     <div
-      className={`rounded-full bg-gradient-to-br from-romantic-rose to-romantic-clay text-white flex items-center justify-center font-sans ${sizes[size]} shadow-sm select-none ${className}`}
+      className={`rounded-full bg-romantic-text dark:bg-romantic-dark-text text-romantic-bg dark:text-romantic-dark-bg ring-2 ring-romantic-clay/40 dark:ring-romantic-dark-clay/40 flex items-center justify-center font-sans ${sizes[size]} select-none ${className}`}
     >
       {initials || "?"}
     </div>

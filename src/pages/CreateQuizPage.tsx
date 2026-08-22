@@ -145,7 +145,7 @@ export default function CreateQuizPage() {
 
       {/* Error Message */}
       {errorMsg && (
-        <div className="p-3.5 rounded-2xl bg-red-50 dark:bg-red-950/20 text-red-500 text-xs font-semibold flex items-center gap-2 border border-red-100 dark:border-red-950/50">
+        <div className="p-3.5 rounded-lg bg-red-50 dark:bg-red-950/20 text-red-500 text-xs font-semibold flex items-center gap-2 border border-red-100 dark:border-red-950/50">
           <Icon
             icon="solar:danger-bold-duotone"
             className="w-4 h-4 shrink-0 text-red-500"
@@ -165,7 +165,7 @@ export default function CreateQuizPage() {
           />
 
           <div className="flex flex-col gap-4 border-t border-romantic-border dark:border-romantic-dark-border pt-6">
-            <h3 className="text-xs font-bold text-romantic-muted dark:text-romantic-dark-muted font-sans tracking-widest uppercase">
+            <h3 className="text-[11px] font-bold text-romantic-muted dark:text-romantic-dark-muted font-mono tracking-widest uppercase">
               Daftar Pertanyaan ({questions.length})
             </h3>
 
@@ -173,7 +173,7 @@ export default function CreateQuizPage() {
               {questions.map((q, idx) => (
                 <div
                   key={q.id}
-                  className="flex items-center gap-3 p-4 rounded-xl bg-romantic-clay/5 dark:bg-romantic-dark-card/40 border border-romantic-border dark:border-romantic-dark-border"
+                  className="flex items-center gap-3 p-4 rounded-lg bg-romantic-bg/60 dark:bg-romantic-dark-card/40 border border-romantic-border dark:border-romantic-dark-border"
                 >
                   <span className="text-xs font-mono font-bold text-romantic-rose dark:text-romantic-dark-rose">
                     {idx + 1}.
@@ -234,7 +234,7 @@ export default function CreateQuizPage() {
       ) : (
         /* Step 2: Answer Questions */
         <Card className="flex flex-col gap-8">
-          <div className="p-4 rounded-xl bg-romantic-rose/5 dark:bg-romantic-dark-rose/5 border border-romantic-border dark:border-romantic-dark-border flex items-start gap-2.5">
+          <div className="p-4 rounded-lg bg-romantic-rose/5 dark:bg-romantic-dark-rose/5 border border-romantic-border dark:border-romantic-dark-border flex items-start gap-2.5">
             <Icon
               icon="solar:info-square-bold-duotone"
               className="w-5 h-5 text-romantic-rose dark:text-romantic-dark-rose shrink-0 mt-0.5"
@@ -250,7 +250,7 @@ export default function CreateQuizPage() {
             {questions.map((q, idx) => (
               <div
                 key={q.id}
-                className="flex flex-col gap-4 p-5 rounded-3xl bg-romantic-clay/5 dark:bg-romantic-dark-card/30 border border-romantic-border dark:border-romantic-dark-border"
+                className="flex flex-col gap-4 p-5 rounded-lg bg-romantic-bg/60 dark:bg-romantic-dark-card/30 border border-romantic-border dark:border-romantic-dark-border"
               >
                 <div className="flex items-start gap-2">
                   <span className="text-xs font-mono font-bold text-romantic-rose dark:text-romantic-dark-rose mt-0.5">

@@ -138,9 +138,9 @@ export default function MatchDetailPage() {
       </div>
 
       {/* Overview Percentage Card & Angle Visualizer */}
-      <Card className="flex flex-col md:flex-row items-center justify-between gap-8 p-8 relative overflow-hidden bg-gradient-to-br from-white to-romantic-rose/5 dark:from-romantic-dark-card dark:to-romantic-dark-rose/5">
+      <Card className="flex flex-col md:flex-row items-center justify-between gap-8 p-8 relative overflow-hidden">
         <div className="flex-1 flex flex-col gap-2 text-center md:text-left">
-          <span className="text-[10px] font-bold uppercase tracking-widest text-romantic-muted dark:text-romantic-dark-muted">
+          <span className="text-[11px] font-semibold font-mono uppercase tracking-widest text-romantic-muted dark:text-romantic-dark-muted">
             Tingkat Penyelarasan Vektor
           </span>
           <h2 className="font-serif text-4xl md:text-5xl font-extrabold text-romantic-text dark:text-romantic-dark-text">
@@ -165,7 +165,7 @@ export default function MatchDetailPage() {
 
       {/* Visual Chart Card */}
       <Card className="flex flex-col gap-6">
-        <h3 className="text-xs font-bold text-romantic-muted dark:text-romantic-dark-muted font-sans tracking-widest uppercase border-b border-romantic-border dark:border-romantic-dark-border pb-4">
+        <h3 className="text-[11px] font-bold text-romantic-muted dark:text-romantic-dark-muted font-mono tracking-widest uppercase border-b border-romantic-border dark:border-romantic-dark-border pb-4">
           Visualisasi Perbandingan Radar (Skala 1-5)
         </h3>
 
@@ -209,7 +209,7 @@ export default function MatchDetailPage() {
 
       {/* Question Table Breakdown */}
       <Card className="flex flex-col gap-4">
-        <h3 className="text-xs font-bold text-romantic-muted dark:text-romantic-dark-muted font-sans tracking-widest uppercase border-b border-romantic-border dark:border-romantic-dark-border pb-4">
+        <h3 className="text-[11px] font-bold text-romantic-muted dark:text-romantic-dark-muted font-mono tracking-widest uppercase border-b border-romantic-border dark:border-romantic-dark-border pb-4">
           Perbandingan Detail Tiap Pertanyaan
         </h3>
 
@@ -224,7 +224,7 @@ export default function MatchDetailPage() {
             return (
               <div
                 key={q.id}
-                className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-xl bg-romantic-clay/5 dark:bg-romantic-dark-card/30 border border-romantic-border dark:border-romantic-dark-border"
+                className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-lg bg-romantic-bg/60 dark:bg-romantic-dark-card/30 border border-romantic-border dark:border-romantic-dark-border"
               >
                 <div className="flex items-start gap-2.5 max-w-lg">
                   <span className="text-xs font-mono font-bold text-romantic-rose dark:text-romantic-dark-rose mt-0.5">
@@ -237,7 +237,7 @@ export default function MatchDetailPage() {
 
                 <div className="flex items-center gap-4 shrink-0 font-sans text-xs">
                   <div className="flex flex-col items-center">
-                    <span className="text-[9px] text-romantic-muted dark:text-romantic-dark-muted uppercase font-bold">
+                    <span className="text-[11px] font-mono text-romantic-muted dark:text-romantic-dark-muted uppercase font-semibold">
                       Kamu
                     </span>
                     <span className="font-bold text-romantic-rose">
@@ -246,7 +246,7 @@ export default function MatchDetailPage() {
                   </div>
                   <div className="h-6 w-[1px] bg-romantic-border dark:bg-romantic-dark-border"></div>
                   <div className="flex flex-col items-center">
-                    <span className="text-[9px] text-romantic-muted dark:text-romantic-dark-muted uppercase font-bold">
+                    <span className="text-[11px] font-mono text-romantic-muted dark:text-romantic-dark-muted uppercase font-semibold">
                       {participant.name}
                     </span>
                     <span className="font-bold text-romantic-clay dark:text-romantic-dark-clay">
@@ -255,7 +255,7 @@ export default function MatchDetailPage() {
                   </div>
                   <div className="h-6 w-[1px] bg-romantic-border dark:bg-romantic-dark-border"></div>
                   <div className="flex flex-col items-center">
-                    <span className="text-[9px] text-romantic-muted dark:text-romantic-dark-muted uppercase font-bold">
+                    <span className="text-[11px] font-mono text-romantic-muted dark:text-romantic-dark-muted uppercase font-semibold">
                       Selisih
                     </span>
                     <span
@@ -277,7 +277,7 @@ export default function MatchDetailPage() {
           onClick={() => setShowMath(!showMath)}
           className="w-full flex items-center justify-between p-5 bg-romantic-rose/5 dark:bg-romantic-dark-rose/5 cursor-pointer font-sans"
         >
-          <span className="text-[10px] font-bold text-romantic-text dark:text-romantic-dark-text uppercase tracking-widest flex items-center gap-2">
+          <span className="text-[11px] font-bold font-mono text-romantic-text dark:text-romantic-dark-text uppercase tracking-widest flex items-center gap-2">
             <Icon
               icon="solar:document-bold-duotone"
               className="w-5 h-5 text-romantic-rose dark:text-romantic-dark-rose"

@@ -12,9 +12,9 @@ export default function Card({
 }: CardProps) {
   return (
     <div
-      className={`p-6 rounded-3xl bg-white dark:bg-romantic-dark-card border border-romantic-border dark:border-romantic-dark-border shadow-[0_8px_30px_rgba(214,140,150,0.06)] dark:shadow-none transition-all duration-300 ${
+      className={`p-6 rounded-xl bg-white dark:bg-romantic-dark-card border border-romantic-border dark:border-romantic-dark-border shadow-[0_1px_2px_rgba(33,27,44,0.04)] dark:shadow-none transition-all duration-300 ${
         hoverable
-          ? "hover:shadow-[0_12px_40px_rgba(214,140,150,0.1)] dark:hover:border-romantic-dark-rose hover:-translate-y-0.5"
+          ? "hover:border-romantic-rose/50 dark:hover:border-romantic-dark-rose/50 hover:shadow-[0_4px_16px_rgba(33,27,44,0.06)] hover:-translate-y-0.5"
           : ""
       } ${className}`}
       {...props}

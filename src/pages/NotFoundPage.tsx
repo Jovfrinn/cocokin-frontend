@@ -11,9 +11,7 @@ export default function NotFoundPage() {
     <div className="flex items-center justify-center py-16">
       <Card className="w-full max-w-md p-8 flex flex-col items-center text-center gap-6 relative overflow-hidden">
         {/* Dekorasi lingkaran background */}
-        <div className="absolute -top-12 -right-12 w-28 h-28 bg-gradient-to-br from-romantic-rose/10 to-romantic-clay/10 rounded-full blur-xl pointer-events-none"></div>
-
-        {/* Icon Hati Rusak / Halaman Hilang */}
+                {/* Icon Hati Rusak / Halaman Hilang */}
         <div className="w-16 h-16 rounded-full bg-romantic-rose/10 dark:bg-romantic-dark-rose/15 flex items-center justify-center text-romantic-rose dark:text-romantic-dark-rose mb-1">
           <Icon icon="solar:heart-broken-bold-duotone" className="w-8 h-8" />
         </div>
@@ -26,7 +24,7 @@ export default function NotFoundPage() {
           <h2 className="font-serif text-xl font-light text-romantic-text dark:text-romantic-dark-text">
             Koordinat Tidak Ditemukan
           </h2>
-          <p className="text-xs text-gray-500 dark:text-gray-400 max-w-xs">
+          <p className="text-xs text-romantic-muted dark:text-romantic-dark-muted max-w-xs">
             Halaman yang kamu cari telah berpindah dimensi atau belum pernah diinisialisasi dalam ruang vektor kami.
           </p>
         </div>

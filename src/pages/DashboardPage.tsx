@@ -103,7 +103,7 @@ export default function DashboardPage() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Quizzes List (Left Column) */}
           <div className="lg:col-span-1 flex flex-col gap-4">
-            <h3 className="text-xs font-bold text-romantic-muted dark:text-romantic-dark-muted font-sans tracking-widest uppercase">
+            <h3 className="text-[11px] font-bold text-romantic-muted dark:text-romantic-dark-muted font-mono tracking-widest uppercase">
               Ruang Koordinat Aktif ({quizzes.length})
             </h3>
             <div className="flex flex-col gap-3">
@@ -114,27 +114,27 @@ export default function DashboardPage() {
                   <div
                     key={quiz.id}
                     onClick={() => setSelectedQuizId(quiz.id)}
-                    className={`p-5 rounded-2xl border transition-all duration-300 cursor-pointer ${
+                    className={`p-5 rounded-lg border transition-all duration-200 cursor-pointer ${
                       isSelected
-                        ? "bg-white dark:bg-romantic-dark-card border-romantic-rose dark:border-romantic-dark-rose shadow-[0_8px_30px_rgba(214,140,150,0.06)]"
+                        ? "bg-white dark:bg-romantic-dark-card border-romantic-rose dark:border-romantic-dark-rose shadow-[0_1px_2px_rgba(33,27,44,0.04)]"
                         : "bg-white/50 dark:bg-romantic-dark-card/50 border-romantic-border dark:border-romantic-dark-border hover:border-romantic-rose dark:hover:border-romantic-dark-rose"
                     }`}
                   >
                     <div className="flex flex-col gap-3">
                       <div>
-                        <h4 className="text-xs font-bold text-romantic-text dark:text-romantic-dark-text line-clamp-1 font-sans">
+                        <h4 className="text-sm font-bold text-romantic-text dark:text-romantic-dark-text line-clamp-1 font-sans">
                           {quiz.title}
                         </h4>
-                        <span className="text-[9px] text-romantic-muted dark:text-romantic-dark-muted font-sans mt-0.5 inline-block">
+                        <span className="text-[11px] text-romantic-muted dark:text-romantic-dark-muted font-mono mt-0.5 inline-block">
                           Diaktifkan{" "}
                           {new Date(quiz.createdAt).toLocaleDateString("id-ID")}
                         </span>
                       </div>
 
                       <div className="flex items-center justify-between gap-2 border-t border-romantic-border dark:border-romantic-dark-border pt-3">
-                        <span className="text-[10px] font-bold text-romantic-muted dark:text-romantic-dark-muted flex items-center gap-1.5">
+                        <span className="text-[11px] font-semibold text-romantic-muted dark:text-romantic-dark-muted flex items-center gap-1.5">
                           <Icon
-                            icon="solar:users-group-two-rounded-bold-duotone"
+                            icon="solar:users-group-two-rounded-linear"
                             className="w-4 h-4 text-romantic-rose dark:text-romantic-dark-rose"
                           />
                           {respCount} Resonansi
@@ -146,10 +146,10 @@ export default function DashboardPage() {
                             e.stopPropagation();
                             handleCopyLink(quiz.id);
                           }}
-                          className={`text-[9px] font-bold uppercase tracking-wider px-2.5 py-1.5 rounded-lg border transition-all cursor-pointer ${
+                          className={`text-[11px] font-semibold uppercase tracking-wider px-2.5 py-1.5 rounded-md border transition-all cursor-pointer font-mono ${
                             copiedId === quiz.id
                               ? "bg-green-50 border-green-200 text-green-600 dark:bg-green-950/20 dark:border-green-900/50"
-                              : "bg-romantic-rose/5 border-romantic-rose/25 text-romantic-rose hover:bg-romantic-rose/10 dark:bg-romantic-dark-rose/5 dark:border-romantic-dark-rose/25 dark:text-romantic-dark-rose"
+                              : "bg-transparent border-romantic-rose/30 text-romantic-rose hover:bg-romantic-rose/5 dark:border-romantic-dark-rose/30 dark:text-romantic-dark-rose"
                           }`}
                         >
                           {copiedId === quiz.id ? "Copied!" : "Salin Link"}
@@ -164,7 +164,7 @@ export default function DashboardPage() {
 
           {/* Quiz Results Panel (Right Column) */}
           <div className="lg:col-span-2 flex flex-col gap-4">
-            <h3 className="text-xs font-bold text-romantic-muted dark:text-romantic-dark-muted font-sans tracking-widest uppercase">
+            <h3 className="text-[11px] font-bold text-romantic-muted dark:text-romantic-dark-muted font-mono tracking-widest uppercase">
               Matriks Analisis Resonansi
             </h3>
 
@@ -177,7 +177,7 @@ export default function DashboardPage() {
                   <p className="text-xs text-romantic-muted dark:text-romantic-dark-muted mt-1.5 font-sans leading-relaxed">
                     Bagikan tautan berikut agar orang lain bisa memetakan
                     vektornya:{" "}
-                    <span className="underline select-all text-romantic-rose dark:text-romantic-dark-rose font-mono font-bold break-all">
+                    <span className="underline select-all text-romantic-rose dark:text-romantic-dark-rose font-mono font-semibold break-all">
                       {window.location.origin}/quiz/{selectedQuiz.id}
                     </span>
                   </p>
@@ -194,7 +194,7 @@ export default function DashboardPage() {
                     />
                   ) : (
                     <div className="flex flex-col gap-4">
-                      <div className="text-[10px] font-bold text-romantic-muted dark:text-romantic-dark-muted uppercase tracking-widest pl-1">
+                      <div className="text-[11px] font-bold text-romantic-muted dark:text-romantic-dark-muted font-mono uppercase tracking-widest pl-1">
                         Daftar Penyelarasan ({participants.length})
                       </div>
 
@@ -202,7 +202,7 @@ export default function DashboardPage() {
                         {participants.map((participant) => (
                           <div
                             key={participant.id}
-                            className="p-4 rounded-2xl bg-romantic-clay/5 dark:bg-romantic-dark-card/40 border border-romantic-border dark:border-romantic-dark-border flex items-center justify-between gap-3 shadow-sm hover:border-romantic-rose dark:hover:border-romantic-dark-rose transition-all duration-300"
+                            className="p-4 rounded-lg bg-romantic-bg/60 dark:bg-romantic-dark-card/40 border border-romantic-border dark:border-romantic-dark-border flex items-center justify-between gap-3 hover:border-romantic-rose dark:hover:border-romantic-dark-rose transition-all duration-200"
                           >
                             <div className="flex items-center gap-3">
                               <Avatar name={participant.name} size="sm" />
@@ -210,7 +210,7 @@ export default function DashboardPage() {
                                 <span className="text-xs font-bold text-romantic-text dark:text-romantic-dark-text font-sans">
                                   {participant.name}
                                 </span>
-                                <span className="text-[9px] text-romantic-muted dark:text-romantic-dark-muted font-mono">
+                                <span className="text-[11px] text-romantic-muted dark:text-romantic-dark-muted font-mono">
                                   {new Date(
                                     participant.submittedAt,
                                   ).toLocaleDateString("id-ID")}
@@ -227,7 +227,7 @@ export default function DashboardPage() {
                                     `/match/${selectedQuiz.id}?participantId=${participant.id}`,
                                   )
                                 }
-                                className="text-[9px] font-bold text-romantic-rose hover:text-romantic-rose-hover dark:text-romantic-dark-rose dark:hover:text-romantic-dark-rose-hover flex items-center gap-0.5 uppercase tracking-wider cursor-pointer font-sans"
+                                className="text-[11px] font-semibold text-romantic-rose hover:text-romantic-rose-hover dark:text-romantic-dark-rose dark:hover:text-romantic-dark-rose-hover flex items-center gap-0.5 uppercase tracking-wider cursor-pointer font-mono"
                               >
                                 Analisis
                                 <Icon

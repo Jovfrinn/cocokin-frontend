@@ -131,9 +131,7 @@ export default function AnswerQuizPage() {
     return (
       <div className="max-w-md mx-auto py-8">
         <Card className="p-8 flex flex-col gap-6 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-romantic-rose/10 to-romantic-clay/10 rounded-bl-full pointer-events-none"></div>
-
-          <div className="flex flex-col items-center text-center gap-2">
+                    <div className="flex flex-col items-center text-center gap-2">
             <div className="w-12 h-12 rounded-full bg-romantic-rose/10 dark:bg-romantic-dark-rose/15 flex items-center justify-center text-romantic-rose dark:text-romantic-dark-rose">
               <Icon icon="solar:heart-lock-bold-duotone" className="w-6 h-6" />
             </div>
@@ -175,9 +173,7 @@ export default function AnswerQuizPage() {
     return (
       <div className="max-w-md mx-auto py-8">
         <Card className="p-8 flex flex-col items-center text-center gap-6 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-tr from-romantic-rose/5 to-romantic-clay/5 pointer-events-none"></div>
-
-          <div className="w-16 h-16 rounded-full bg-romantic-rose/10 dark:bg-romantic-dark-rose/15 flex items-center justify-center text-romantic-rose dark:text-romantic-dark-rose">
+                    <div className="w-16 h-16 rounded-full bg-romantic-rose/10 dark:bg-romantic-dark-rose/15 flex items-center justify-center text-romantic-rose dark:text-romantic-dark-rose">
             <Icon
               icon="solar:emoji-funny-bold-duotone"
               className="w-8 h-8 animate-bounce"
@@ -195,7 +191,7 @@ export default function AnswerQuizPage() {
           </div>
 
           <div className="flex flex-col items-center gap-2">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-romantic-muted dark:text-romantic-dark-muted">
+            <span className="text-[11px] font-semibold font-mono uppercase tracking-widest text-romantic-muted dark:text-romantic-dark-muted">
               Kecocokan Spasial
             </span>
             <MatchPercentageBadge
@@ -236,7 +232,7 @@ export default function AnswerQuizPage() {
     <div className="max-w-2xl mx-auto py-4 flex flex-col gap-6">
       {/* Progress Header */}
       <div className="flex flex-col gap-2">
-        <div className="flex justify-between items-center text-[10px] font-bold text-romantic-muted dark:text-romantic-dark-muted uppercase tracking-widest">
+        <div className="flex justify-between items-center text-[11px] font-semibold font-mono text-romantic-muted dark:text-romantic-dark-muted uppercase tracking-widest">
           <span>
             Dimensi {currentIdx + 1} dari {quiz.questions.length}
           </span>

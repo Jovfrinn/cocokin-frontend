@@ -6,6 +6,8 @@ interface VectorAngleVisualizerProps {
   size?: number;
 }
 
+const TICKS = [0, 15, 30, 45, 60, 75, 90];
+
 export default function VectorAngleVisualizer({
   score = 100,
   animate = false,
@@ -34,151 +36,166 @@ export default function VectorAngleVisualizer({
   const thetaRad = Math.acos(similarity);
   const thetaDeg = (thetaRad * 180) / Math.PI;
 
-  const originX = 70;
-  const originY = 210;
-  const length = 150;
+  const originX = 60;
+  const originY = 195;
+  const length = 148;
+  const bezelR = 168;
 
-  // Vector A (Base) at 0 degrees (pointing straight right)
   const vectorAX = originX + length;
   const vectorAY = originY;
-
-  // Vector B at theta degrees (pointing up-right)
   const vectorBX = originX + length * Math.cos(thetaRad);
   const vectorBY = originY - length * Math.sin(thetaRad);
 
-  // Arc details (Radius 50)
-  const arcRadius = 45;
+  const arcRadius = 42;
   const arcAX = originX + arcRadius;
   const arcAY = originY;
   const arcBX = originX + arcRadius * Math.cos(thetaRad);
   const arcBY = originY - arcRadius * Math.sin(thetaRad);
-
-  // Large arc flag is 0 because theta <= 90 deg (arccos(0) = 90 deg, arccos(1) = 0 deg)
   const arcPath = `M ${arcAX} ${arcAY} A ${arcRadius} ${arcRadius} 0 0 0 ${arcBX} ${arcBY}`;
 
+  const rad = (d: number) => (d * Math.PI) / 180;
+
+  // Ease the needle into a new reading instead of snapping — skip while the
+  // continuous demo oscillation is driving updates every 30ms, where a CSS
+  // transition would just lag behind the target instead of looking smooth.
+  const settle = animate ? "" : "transition-[x2,y2,cx,cy,d] duration-700 ease-[cubic-bezier(0.34,1.4,0.64,1)]";
+
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center gap-3 animate-fade-in">
       <svg
-        viewBox="0 0 300 270"
+        viewBox="0 0 300 230"
         width={size}
-        height={size * 0.9}
-        className="text-romantic-rose dark:text-romantic-dark-rose overflow-visible font-sans"
+        height={size * 0.77}
+        style={{ transformOrigin: `${originX}px ${originY}px` }}
+        className="overflow-visible font-sans animate-needle-in"
       >
-        {/* Axis Lines (Subtle grid) */}
-        <line
-          x1={originX - 30}
-          y1={originY}
-          x2={originX + length + 35}
-          y2={originY}
-          stroke="currentColor"
+        {/* Bezel arc — the instrument's fixed dial */}
+        <path
+          d={`M ${originX + bezelR} ${originY} A ${bezelR} ${bezelR} 0 0 0 ${originX} ${originY - bezelR}`}
+          fill="none"
+          stroke="var(--color-romantic-clay)"
           strokeWidth="1.5"
-          className="opacity-15 dark:opacity-10"
-        />
-        <line
-          x1={originX}
-          y1={originY + 30}
-          x2={originX}
-          y2={originY - length - 30}
-          stroke="currentColor"
-          strokeWidth="1.5"
-          className="opacity-15 dark:opacity-10"
+          className="opacity-30 dark:opacity-40"
         />
 
-        {/* Arc for Angle (Theta) */}
+        {/* Degree ticks */}
+        {TICKS.map((deg) => {
+          const a = rad(deg);
+          const inner = deg % 30 === 0 ? bezelR - 10 : bezelR - 6;
+          const x1 = originX + inner * Math.cos(a);
+          const y1 = originY - inner * Math.sin(a);
+          const x2 = originX + bezelR * Math.cos(a);
+          const y2 = originY - bezelR * Math.sin(a);
+          const lx = originX + (bezelR + 14) * Math.cos(a);
+          const ly = originY - (bezelR + 14) * Math.sin(a);
+          return (
+            <g key={deg}>
+              <line
+                x1={x1}
+                y1={y1}
+                x2={x2}
+                y2={y2}
+                stroke="var(--color-romantic-clay)"
+                strokeWidth={deg % 30 === 0 ? 2 : 1}
+                className="opacity-50 dark:opacity-60"
+              />
+              {deg % 30 === 0 && (
+                <text
+                  x={lx}
+                  y={ly + 3}
+                  textAnchor="middle"
+                  fontSize="9"
+                  fontFamily="var(--font-mono)"
+                  fill="var(--color-romantic-muted)"
+                  className="select-none opacity-70"
+                >
+                  {deg}&deg;
+                </text>
+              )}
+            </g>
+          );
+        })}
+
+        {/* Angle arc (theta) */}
         {thetaDeg > 1 && (
           <path
             d={arcPath}
             fill="none"
             stroke="var(--color-romantic-clay)"
             strokeWidth="2.5"
-            className="opacity-80 dark:opacity-70"
+            className={`opacity-90 ${settle}`}
           />
         )}
 
-        {/* Vector A (Creator) */}
+        {/* Vector A (reference / creator) */}
         <line
           x1={originX}
           y1={originY}
           x2={vectorAX}
           y2={vectorAY}
           stroke="var(--color-romantic-rose)"
-          strokeWidth="4.5"
+          strokeWidth="3.5"
           strokeLinecap="round"
         />
-        <circle cx={vectorAX} cy={vectorAY} r="6" fill="var(--color-romantic-rose)" />
+        <circle cx={vectorAX} cy={vectorAY} r="5" fill="var(--color-romantic-rose)" />
+        <text
+          x={vectorAX - 14}
+          y={vectorAY + 18}
+          fontSize="10"
+          fontWeight="700"
+          fill="var(--color-romantic-rose)"
+          fontFamily="var(--font-mono)"
+          className="select-none uppercase tracking-widest"
+        >
+          A
+        </text>
 
-        {/* Vector B (Respondent) */}
+        {/* Vector B (respondent) */}
         <line
           x1={originX}
           y1={originY}
           x2={vectorBX}
           y2={vectorBY}
           stroke="var(--color-romantic-clay)"
-          strokeWidth="4.5"
+          strokeWidth="3.5"
           strokeLinecap="round"
+          className={settle}
         />
-        <circle cx={vectorBX} cy={vectorBY} r="6" fill="var(--color-romantic-clay)" />
-
-        {/* Origin Circle */}
-        <circle
-          cx={originX}
-          cy={originY}
-          r="8"
-          fill="var(--color-romantic-text)"
-          className="dark:fill-romantic-dark-text shadow"
-        />
-
-        {/* Angle Annotation Text */}
-        {thetaDeg > 3 && (
-          <text
-            x={originX + 55}
-            y={originY - 20}
-            fontSize="12"
-            fontWeight="bold"
-            fill="var(--color-romantic-clay)"
-            className="font-mono select-none"
-          >
-            &theta; = {Math.round(thetaDeg)}&deg;
-          </text>
-        )}
-
-        {/* Label for Vector A */}
+        <circle cx={vectorBX} cy={vectorBY} r="5" fill="var(--color-romantic-clay)" className={settle} />
         <text
-          x={vectorAX + 10}
-          y={vectorAY + 4}
-          fontSize="10"
-          fontWeight="bold"
-          fill="var(--color-romantic-rose)"
-          className="select-none font-sans uppercase tracking-widest"
-        >
-          A
-        </text>
-
-        {/* Label for Vector B */}
-        <text
-          x={vectorBX + 6}
+          x={vectorBX + 8}
           y={vectorBY - 6}
           fontSize="10"
-          fontWeight="bold"
+          fontWeight="700"
           fill="var(--color-romantic-clay)"
-          className="select-none font-sans uppercase tracking-widest"
+          fontFamily="var(--font-mono)"
+          className="select-none uppercase tracking-widest"
         >
           B
         </text>
 
-        {/* Bottom display info */}
-        <text
-          x="150"
-          y="255"
-          textAnchor="middle"
-          fontSize="13"
-          fontWeight="bold"
-          fill="currentColor"
-          className="opacity-90 font-sans tracking-wide text-gray-800 dark:text-gray-100"
-        >
-          Kecocokan: {Math.round(currentScore * 10) / 10}% (cos &theta; = {similarity.toFixed(3)})
-        </text>
+        {/* Origin pivot */}
+        <circle
+          cx={originX}
+          cy={originY}
+          r="6"
+          fill="var(--color-romantic-text)"
+          className="dark:fill-romantic-dark-text"
+        />
       </svg>
+
+      {/* LCD-style readout */}
+      <div className="flex items-center gap-px rounded-md border border-romantic-border dark:border-romantic-dark-border overflow-hidden font-mono text-xs">
+        <span className="bg-romantic-text dark:bg-romantic-dark-text text-romantic-bg dark:text-romantic-dark-bg px-2.5 py-1.5 font-semibold">
+          &theta; {Math.round(thetaDeg)}&deg;
+        </span>
+        <span className="bg-white dark:bg-romantic-dark-card text-romantic-muted dark:text-romantic-dark-muted px-2.5 py-1.5">
+          cos&theta; {similarity.toFixed(3)}
+        </span>
+        <span className="bg-romantic-rose/10 dark:bg-romantic-dark-rose/10 text-romantic-rose dark:text-romantic-dark-rose px-2.5 py-1.5 font-semibold">
+          {Math.round(currentScore * 10) / 10}%
+        </span>
+      </div>
     </div>
   );
 }

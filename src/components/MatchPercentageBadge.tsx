@@ -7,24 +7,26 @@ export default function MatchPercentageBadge({
   score,
   className = "",
 }: MatchPercentageBadgeProps) {
-  let badgeColor = "";
-  
+  let tone = "";
+
   if (score < 50) {
-    badgeColor =
-      "bg-romantic-clay/5 dark:bg-romantic-dark-border/20 text-romantic-muted dark:text-romantic-dark-muted border border-romantic-border dark:border-romantic-dark-border";
+    tone =
+      "border-romantic-border text-romantic-muted dark:border-romantic-dark-border dark:text-romantic-dark-muted";
   } else if (score < 80) {
-    badgeColor =
-      "bg-romantic-clay/10 text-romantic-clay border border-romantic-clay/30 dark:text-romantic-dark-clay dark:border-romantic-dark-clay/30";
+    tone =
+      "border-romantic-clay/50 text-romantic-clay dark:border-romantic-dark-clay/50 dark:text-romantic-dark-clay";
   } else {
-    badgeColor =
-      "bg-gradient-to-r from-romantic-rose to-romantic-clay text-white shadow-sm shadow-romantic-rose/10 dark:from-romantic-dark-rose dark:to-romantic-dark-clay";
+    tone =
+      "border-romantic-rose text-romantic-rose bg-romantic-rose/[0.06] dark:border-romantic-dark-rose dark:text-romantic-dark-rose dark:bg-romantic-dark-rose/[0.08]";
   }
 
   return (
     <span
-      className={`inline-flex items-center justify-center font-sans font-bold px-3 py-1.5 rounded-full text-xs sm:text-sm leading-none ${badgeColor} ${className}`}
+      className={`inline-flex items-baseline gap-0.5 font-mono font-semibold px-2.5 py-1 rounded-md border text-xs leading-none ${tone} ${className}`}
     >
-      {score}% Cocok
+      <span className="opacity-50 text-[0.85em]">{"⟨"}</span>
+      {score}%
+      <span className="opacity-50 text-[0.85em]">{"⟩"}</span>
     </span>
   );
 }

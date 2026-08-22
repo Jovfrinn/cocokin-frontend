@@ -16,15 +16,15 @@ export default function Button({
   ...props
 }: ButtonProps) {
   const baseStyles =
-    "inline-flex items-center justify-center font-sans font-medium rounded-2xl transition-all duration-300 active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none cursor-pointer";
+    "inline-flex items-center justify-center font-sans font-semibold tracking-tight rounded-lg transition-all duration-200 active:scale-[0.98] disabled:opacity-40 disabled:pointer-events-none cursor-pointer";
 
   const variants = {
     primary:
-      "bg-romantic-rose hover:bg-romantic-rose-hover text-white dark:bg-romantic-dark-rose dark:hover:bg-romantic-dark-rose-hover dark:text-romantic-dark-bg shadow-sm border border-transparent focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-romantic-rose",
+      "bg-romantic-rose hover:bg-romantic-rose-hover text-white dark:bg-romantic-dark-rose dark:hover:bg-romantic-dark-rose-hover dark:text-romantic-dark-bg shadow-[0_2px_0_0_rgba(0,0,0,0.12)] active:shadow-none border border-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-romantic-bg dark:focus-visible:ring-offset-romantic-dark-bg focus-visible:ring-romantic-rose",
     secondary:
-      "bg-romantic-clay/10 hover:bg-romantic-clay/20 text-romantic-rose dark:bg-romantic-dark-clay/10 dark:hover:bg-romantic-dark-clay/20 dark:text-romantic-dark-rose border border-transparent",
+      "bg-romantic-text/[0.05] hover:bg-romantic-text/[0.09] text-romantic-text dark:bg-white/[0.06] dark:hover:bg-white/[0.1] dark:text-romantic-dark-text border border-romantic-border dark:border-romantic-dark-border",
     outline:
-      "bg-transparent hover:bg-romantic-rose/5 border border-romantic-rose/30 text-romantic-rose dark:hover:bg-romantic-dark-rose/5 dark:border-romantic-dark-rose/30 dark:text-romantic-dark-rose",
+      "bg-transparent hover:bg-romantic-rose/[0.06] border border-romantic-rose/40 text-romantic-rose dark:hover:bg-romantic-dark-rose/10 dark:border-romantic-dark-rose/40 dark:text-romantic-dark-rose",
   };
 
   const sizes = {

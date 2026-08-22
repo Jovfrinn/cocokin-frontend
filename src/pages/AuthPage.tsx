@@ -39,13 +39,28 @@ export default function AuthPage() {
   const tab = searchParams.get("tab") || "login";
   const isLogin = tab === "login";
 
-  // Check if user is already logged in
+  // Check if user is already logged in OR has just logged in via Google OAuth redirect
   useEffect(() => {
+    const tokenParam = searchParams.get("token");
+    const userParam = searchParams.get("user");
+
+    if (tokenParam && userParam) {
+      try {
+        const decodedUser = JSON.parse(decodeURIComponent(userParam));
+        localStorage.setItem("access_token", decodeURIComponent(tokenParam));
+        localStorage.setItem("currentUser", JSON.stringify(decodedUser));
+        navigate("/dashboard");
+        return;
+      } catch (err) {
+        console.error("Gagal men-decode data login Google", err);
+      }
+    }
+
     const user = localStorage.getItem("currentUser");
     if (user) {
       navigate("/dashboard");
     }
-  }, [navigate]);
+  }, [navigate, searchParams]);
 
   const {
     register: loginRegister,
@@ -119,16 +134,14 @@ export default function AuthPage() {
     <div className="flex items-center justify-center py-12">
       <Card className="w-full max-w-md p-8 flex flex-col gap-6 relative overflow-hidden">
         {/* Decorative background circle */}
-        <div className="absolute -top-12 -right-12 w-28 h-28 bg-gradient-to-br from-romantic-rose/10 to-romantic-clay/10 rounded-full blur-xl pointer-events-none"></div>
-
-        <div className="flex flex-col items-center text-center gap-2">
+                <div className="flex flex-col items-center text-center gap-2">
           <div className="w-12 h-12 rounded-full bg-romantic-rose/10 dark:bg-romantic-dark-rose/15 flex items-center justify-center text-romantic-rose dark:text-romantic-dark-rose mb-1">
             <Icon icon="solar:lock-password-bold-duotone" className="w-6 h-6" />
           </div>
           <h2 className="font-serif text-2xl font-light text-romantic-text dark:text-romantic-dark-text">
             {isLogin ? "Selamat Datang Kembali" : "Gabung Cocokin.ai"}
           </h2>
-          <p className="text-xs text-gray-500 dark:text-gray-400">
+          <p className="text-xs text-romantic-muted dark:text-romantic-dark-muted">
             {isLogin
               ? "Masuk untuk melihat hasil kuisionermu"
               : "Daftar gratis untuk mulai membuat kuisioner"}
@@ -136,7 +149,7 @@ export default function AuthPage() {
         </div>
 
         {errorMsg && (
-          <div className="p-3.5 rounded-2xl bg-red-50 dark:bg-red-950/20 text-red-500 text-xs font-semibold flex items-center gap-2 border border-red-100 dark:border-red-950/50">
+          <div className="p-3.5 rounded-lg bg-red-50 dark:bg-red-950/20 text-red-500 text-xs font-semibold flex items-center gap-2 border border-red-100 dark:border-red-950/50">
             <Icon
               icon="solar:danger-bold-duotone"
               className="w-4 h-4 shrink-0 text-red-500"
@@ -146,7 +159,7 @@ export default function AuthPage() {
         )}
 
         {successMsg && (
-          <div className="p-3.5 rounded-2xl bg-green-50 dark:bg-green-950/20 text-green-500 text-xs font-semibold flex items-center gap-2 border border-green-100 dark:border-green-950/50">
+          <div className="p-3.5 rounded-lg bg-green-50 dark:bg-green-950/20 text-green-500 text-xs font-semibold flex items-center gap-2 border border-green-100 dark:border-green-950/50">
             <Icon
               icon="solar:check-circle-bold-duotone"
               className="w-4 h-4 shrink-0 text-green-500"
@@ -213,6 +226,24 @@ export default function AuthPage() {
             </Button>
           </form>
         )}
+
+        {/* Google OAuth Login Button */}
+        <div className="flex flex-col gap-3">
+          <div className="flex items-center gap-2 text-xs text-romantic-muted/50 my-1 justify-center">
+            <span className="h-[1px] bg-romantic-border dark:bg-romantic-dark-border w-1/4"></span>
+            <span className="font-mono text-[9px] uppercase tracking-widest">atau</span>
+            <span className="h-[1px] bg-romantic-border dark:bg-romantic-dark-border w-1/4"></span>
+          </div>
+
+          <Button
+            variant="outline"
+            onClick={() => window.location.href = "http://localhost:3000/auth/google"}
+            className="w-full flex items-center justify-center gap-2 border-romantic-border dark:border-romantic-dark-border text-romantic-text dark:text-romantic-dark-text hover:bg-romantic-rose/5"
+          >
+            <Icon icon="logos:google-icon" className="w-4 h-4 shrink-0" />
+            {isLogin ? "Masuk dengan Google" : "Daftar dengan Google"}
+          </Button>
+        </div>
 
         <div className="text-center mt-2 border-t border-romantic-border dark:border-romantic-dark-border pt-4">
           <button
