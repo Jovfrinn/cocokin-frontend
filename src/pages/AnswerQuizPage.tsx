@@ -7,9 +7,7 @@ import Button from "../components/Button";
 import RatingSlider from "../components/RatingSlider";
 import MatchPercentageBadge from "../components/MatchPercentageBadge";
 import LoadingSpinner from "../components/LoadingSpinner";
-import { mockStorage } from "../services/mockData";
-import { calculateCosineSimilarity } from "../utils/math";
-import type { Participant, Quiz } from "../types";
+import type { Quiz } from "../types";
 import { quizService } from "../services/quizService";
 
 export default function AnswerQuizPage() {
@@ -131,7 +129,7 @@ export default function AnswerQuizPage() {
     return (
       <div className="max-w-md mx-auto py-8">
         <Card className="p-8 flex flex-col gap-6 relative overflow-hidden">
-                    <div className="flex flex-col items-center text-center gap-2">
+          <div className="flex flex-col items-center text-center gap-2">
             <div className="w-12 h-12 rounded-full bg-romantic-rose/10 dark:bg-romantic-dark-rose/15 flex items-center justify-center text-romantic-rose dark:text-romantic-dark-rose">
               <Icon icon="solar:heart-lock-bold-duotone" className="w-6 h-6" />
             </div>
@@ -173,7 +171,7 @@ export default function AnswerQuizPage() {
     return (
       <div className="max-w-md mx-auto py-8">
         <Card className="p-8 flex flex-col items-center text-center gap-6 relative overflow-hidden">
-                    <div className="w-16 h-16 rounded-full bg-romantic-rose/10 dark:bg-romantic-dark-rose/15 flex items-center justify-center text-romantic-rose dark:text-romantic-dark-rose">
+          <div className="w-16 h-16 rounded-full bg-romantic-rose/10 dark:bg-romantic-dark-rose/15 flex items-center justify-center text-romantic-rose dark:text-romantic-dark-rose">
             <Icon
               icon="solar:emoji-funny-bold-duotone"
               className="w-8 h-8 animate-bounce"

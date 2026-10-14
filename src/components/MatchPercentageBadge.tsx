@@ -7,7 +7,7 @@ export default function MatchPercentageBadge({
   score,
   className = "",
 }: MatchPercentageBadgeProps) {
-  let tone = "";
+  let tone: string;
 
   if (score < 50) {
     tone =

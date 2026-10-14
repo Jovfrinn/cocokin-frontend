@@ -25,7 +25,7 @@ export const quizService = {
     quizId: string,
     name: string,
     answers: { questionId: string; value: number }[],
-  ): Promise<any> => {
+  ): Promise<Participant> => {
     const response = await api.post(`/quizzes/${quizId}/submit`, {
       name,
       answers,

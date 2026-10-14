@@ -13,22 +13,21 @@ export default function VectorAngleVisualizer({
   animate = false,
   size = 300,
 }: VectorAngleVisualizerProps) {
-  const [currentScore, setCurrentScore] = useState(score);
+  const [animatedScore, setAnimatedScore] = useState(score);
 
   useEffect(() => {
-    if (animate) {
-      let angle = 0;
-      const interval = setInterval(() => {
-        angle += 0.025;
-        // Oscillate score smoothly between 40% and 98%
-        const osc = 69 + Math.sin(angle) * 29;
-        setCurrentScore(osc);
-      }, 30);
-      return () => clearInterval(interval);
-    } else {
-      setCurrentScore(score);
-    }
-  }, [score, animate]);
+    if (!animate) return;
+    let angle = 0;
+    const interval = setInterval(() => {
+      angle += 0.025;
+      // Oscillate score smoothly between 40% and 98%
+      const osc = 69 + Math.sin(angle) * 29;
+      setAnimatedScore(osc);
+    }, 30);
+    return () => clearInterval(interval);
+  }, [animate]);
+
+  const currentScore = animate ? animatedScore : score;
 
   // Convert score (0 - 100) to similarity (0 - 1)
   const similarity = Math.max(0, Math.min(1, currentScore / 100));

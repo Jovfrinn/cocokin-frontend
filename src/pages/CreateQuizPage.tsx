@@ -5,9 +5,9 @@ import Card from "../components/Card";
 import { Input } from "../components/Input";
 import Button from "../components/Button";
 import RatingSlider from "../components/RatingSlider";
-import { mockStorage } from "../services/mockData";
-import type { Quiz, Question } from "../types";
+import type { Question } from "../types";
 import { quizService } from "../services/quizService";
+import axios from "axios";
 
 export default function CreateQuizPage() {
   const navigate = useNavigate();
@@ -103,11 +103,14 @@ export default function CreateQuizPage() {
       });
 
       navigate("/dashboard");
-    } catch (err: any) {
-      if (err.response) {
-        setErrorMsg(err.response.data.message || "Gagal membuat kuisioner");
+    } catch (err: unknown) {
+      if (axios.isAxiosError(err) && err.response?.data?.message) {
+        const msg = Array.isArray(err.response.data.message)
+          ? err.response.data.message.join(", ")
+          : err.response.data.message;
+        setErrorMsg(msg);
       } else {
-        setErrorMsg("Terjadi kesalahan");
+        setErrorMsg("Terjadi kesalahan saat membuat kuisioner");
       }
     }
   };

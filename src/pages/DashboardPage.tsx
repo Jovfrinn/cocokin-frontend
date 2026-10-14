@@ -6,6 +6,7 @@ import Button from "../components/Button";
 import MatchPercentageBadge from "../components/MatchPercentageBadge";
 import EmptyState from "../components/EmptyState";
 import Avatar from "../components/Avatar";
+import LoadingSpinner from "../components/LoadingSpinner";
 import type { Quiz, Participant } from "../types";
 import { quizService } from "../services/quizService";
 
@@ -15,6 +16,7 @@ export default function DashboardPage() {
   // Read current user
   const currentUserJson = localStorage.getItem("currentUser");
   const currentUser = currentUserJson ? JSON.parse(currentUserJson) : null;
+  const token = localStorage.getItem("access_token");
 
   const [quizzes, setQuizzes] = useState<Quiz[]>([]);
   const [selectedQuizId, setSelectedQuizId] = useState<string | null>(null);
@@ -23,7 +25,7 @@ export default function DashboardPage() {
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    if (!currentUser) {
+    if (!token) {
       navigate("/login");
       return;
     }
@@ -42,7 +44,7 @@ export default function DashboardPage() {
       }
     };
     fetchQuizzes();
-  }, [navigate]);
+  }, [token, navigate]);
   // 2. Ambil list pengisi kuis ketika kuis yang dipilih berubah
   useEffect(() => {
     const fetchSubmissions = async () => {
@@ -62,13 +64,20 @@ export default function DashboardPage() {
 
   if (!currentUser) return null;
 
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-[50vh]">
+        <LoadingSpinner />
+      </div>
+    );
+  }
+
   const handleCopyLink = (quizId: string) => {
     const link = `${window.location.origin}/quiz/${quizId}`;
     navigator.clipboard.writeText(link);
     setCopiedId(quizId);
     setTimeout(() => setCopiedId(null), 2000);
   };
-
 
   const selectedQuiz = quizzes.find((q) => q.id === selectedQuizId);
 
@@ -109,7 +118,7 @@ export default function DashboardPage() {
             <div className="flex flex-col gap-3">
               {quizzes.map((quiz) => {
                 const isSelected = quiz.id === selectedQuizId;
-                const respCount = (quiz as any).submissions?.length || 0;
+                const respCount = quiz.submissions?.length || 0;
                 return (
                   <div
                     key={quiz.id}
@@ -214,7 +223,8 @@ export default function DashboardPage() {
                                   {new Date(
                                     participant.submittedAt,
                                   ).toLocaleDateString("id-ID")}
-                                  {participant.location && ` • ${participant.location}`}
+                                  {participant.location &&
+                                    ` • ${participant.location}`}
                                 </span>
                               </div>
                             </div>

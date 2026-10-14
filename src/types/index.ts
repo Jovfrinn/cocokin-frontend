@@ -7,6 +7,11 @@ export interface User {
   createdAt?: string;
 }
 
+export interface AuthResponse {
+  access_token: string;
+  user: User;
+}
+
 export interface Question {
   id: string;
   text: string;
@@ -21,6 +26,7 @@ export interface Quiz {
   creatorId: number;
   creatorName?: string;
   questions: Question[];
+  submissions?: Participant[];
 }
 
 export interface Answer {

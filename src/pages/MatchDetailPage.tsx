@@ -16,7 +16,6 @@ import Button from "../components/Button";
 import MatchPercentageBadge from "../components/MatchPercentageBadge";
 import LoadingSpinner from "../components/LoadingSpinner";
 import VectorAngleVisualizer from "../components/VectorAngleVisualizer";
-import { mockStorage } from "../services/mockData";
 import { calculateCosineSimilarity } from "../utils/math";
 import type { Quiz, Participant, MatchCalculation } from "../types";
 import { quizService } from "../services/quizService";
@@ -309,7 +308,7 @@ export default function MatchDetailPage() {
 
               <div className="my-3 py-3 px-4 rounded-xl bg-romantic-clay/5 dark:bg-romantic-dark-bg/50 border border-romantic-border dark:border-romantic-dark-border text-center font-serif text-lg text-romantic-text dark:text-romantic-dark-text">
                 {
-                  "$$\\text{Cosine Similarity} = \\frac{\\mathbf{A} \cdot \\mathbf{B}}{\\|\\mathbf{A}\\| \\|\\mathbf{B}\\|}$$"
+                  "$$\\text{Cosine Similarity} = \\frac{\\mathbf{A} \\cdot \\mathbf{B}}{\\|\\mathbf{A}\\| \\|\\mathbf{B}\\|}$$"
                 }
               </div>
             </div>

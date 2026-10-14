@@ -8,6 +8,7 @@ import Card from "../components/Card";
 import { Input } from "../components/Input";
 import Button from "../components/Button";
 import { userService } from "../services/userService";
+import axios from "axios";
 
 const loginSchema = z.object({
   email: z.string().email({ message: "Format email tidak valid" }),
@@ -94,8 +95,8 @@ export default function AuthPage() {
       localStorage.setItem("access_token", responseData.access_token);
       localStorage.setItem("currentUser", JSON.stringify(responseData.user));
       navigate("/dashboard");
-    } catch (err) {
-      setErrorMsg('Gagal menyambung ke server')
+    } catch {
+      setErrorMsg('Gagal menyambung ke server');
     } finally {
       setIsLoading(false);
     }
@@ -111,13 +112,18 @@ export default function AuthPage() {
         username: data.username,
         email: data.email,
         password: data.password,
-      })
+      });
 
       setSuccessMsg("Pendaftaran berhasil! Silahkan masuk.");
-      setSearchParams({tab: 'login'});
+      setSearchParams({ tab: 'login' });
       resetRegisterForm();
-    } catch(err: any){
-      const message = err.response?.data?.message || "Gagal mendaftar. Pastikan backend menyala.";
+    } catch (err: unknown) {
+      let message = "Gagal mendaftar. Pastikan backend menyala.";
+      if (axios.isAxiosError(err) && err.response?.data?.message) {
+        message = Array.isArray(err.response.data.message)
+          ? err.response.data.message.join(", ")
+          : err.response.data.message;
+      }
       setErrorMsg(message);
     } finally {
       setIsLoading(false);
