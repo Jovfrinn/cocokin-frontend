@@ -61,7 +61,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <div className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
           {/* Logo */}
           <Link
-            to={user ? "/dashboard" : "/"}
+            to="/"
             className="flex items-center gap-2 focus:outline-none"
           >
             <Logomark className="w-6 h-6" />
@@ -74,6 +74,16 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <div className="flex items-center gap-4">
             {!isAuthPage && (
               <nav className="hidden sm:flex items-center gap-6">
+                <Link
+                  to="/"
+                  className={`text-xs font-semibold uppercase tracking-wider transition-colors ${
+                    location.pathname === "/"
+                      ? "text-romantic-rose dark:text-romantic-dark-rose"
+                      : "text-romantic-muted hover:text-romantic-rose dark:text-romantic-dark-muted dark:hover:text-romantic-dark-rose"
+                  }`}
+                >
+                  Home
+                </Link>
                 {!user ? (
                   <>
                     <a
