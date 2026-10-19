@@ -25,6 +25,9 @@ export default function MatchDetailPage() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const participantId = searchParams.get("participantId");
+  const isLoggedIn = !!localStorage.getItem("access_token");
+  const backPath = isLoggedIn ? "/dashboard" : "/";
+  const backLabel = isLoggedIn ? "Kembali ke Dashboard" : "Kembali ke Beranda";
 
   const [quiz, setQuiz] = useState<Quiz | null>(null);
   const [participant, setParticipant] = useState<Participant | null>(null);
@@ -40,10 +43,8 @@ export default function MatchDetailPage() {
           const qData = await quizService.getById(id);
           setQuiz(qData);
 
-          // 2. Ambil list submission kuis dari backend
-          const pList = await quizService.getSubmissions(id);
-          // Cari partisipan spesifik berdasarkan ID
-          const pData = pList.find((p) => p.id === participantId);
+          // 2. Ambil submission partisipan (endpoint publik, tanpa login)
+          const pData = await quizService.getSubmission(id, participantId);
 
           if (pData) {
             setParticipant(pData);
@@ -84,8 +85,8 @@ export default function MatchDetailPage() {
         <p className="text-xs text-romantic-muted dark:text-romantic-dark-muted">
           Data pencocokan tidak valid atau sudah dihapus.
         </p>
-        <Button onClick={() => navigate("/dashboard")} className="mt-2">
-          Kembali ke Dashboard
+        <Button onClick={() => navigate(backPath)} className="mt-2">
+          {backLabel}
         </Button>
       </div>
     );
@@ -116,11 +117,11 @@ export default function MatchDetailPage() {
       <div className="flex flex-col gap-4">
         <div>
           <button
-            onClick={() => navigate("/dashboard")}
+            onClick={() => navigate(backPath)}
             className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-romantic-muted hover:text-romantic-rose dark:text-romantic-dark-muted dark:hover:text-romantic-dark-rose transition-colors cursor-pointer"
           >
             <Icon icon="solar:arrow-left-outline" className="w-4 h-4" />
-            Kembali ke Dashboard
+            {backLabel}
           </button>
         </div>
 

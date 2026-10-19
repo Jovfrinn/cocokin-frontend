@@ -39,4 +39,14 @@ export const quizService = {
     );
     return response.data;
   },
+
+  getSubmission: async (
+    quizId: string,
+    submissionId: string,
+  ): Promise<Participant> => {
+    const response = await api.get<Participant>(
+      `/quizzes/${quizId}/submissions/${submissionId}`,
+    );
+    return response.data;
+  },
 };
